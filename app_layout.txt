@@ -1,0 +1,85 @@
+pages, routes, templates & how they connect to each other
+
+GENERAL MAPPING
+
+homepage:
+	bg image
+	logo
+	slogan
+	button --> leads to /melons
+	footer
+
+/melons
+	navbar
+		logo --> homepage
+		image for melon cart
+		melon cart --> cart
+		login --> **currently goes to /melons
+
+	each melon item
+		image
+		price
+		button --> product details page
+
+		product details
+			image of melon
+			details
+			price
+			button --> **add to cart
+
+/cart
+	table of melons added to cart:
+		name
+		quantity
+		price
+		total
+	total
+	button for checkout --> /melons + flash message
+
+BACKEND MAPPING
+
+shoppingsite.py
+
+	/
+		homepage.html
+			css: http://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.css
+			css: /static/css/homepage.css
+			img: /static/img/ubermelon-logo.png
+			link: /melons
+
+	/melons
+		all_melons.html
+			data: melons.py
+				each melon:
+				link: /melon/{{ melon.melon_id }}
+				link: /melon/{{ melon.melon_id }}
+				image: {{ melon.image_url }}
+				button: /melon/{{ melon.melon_id }}
+
+	/melon/<melon_id>
+		melon_details.html
+			img: {{ display_melon.image_url }}
+			button: /add_to_cart/{{ display_melon.melon_id }}
+			data: melons.py
+
+	/cart
+		cart.html
+			button: /checkout
+
+	/add_to_cart/<melon_id>
+		**TO DO**
+
+	/login
+		login.html
+		**TO DO**
+
+	/checkout
+		redirect /melons
+
+
+
+
+
+
+
+
